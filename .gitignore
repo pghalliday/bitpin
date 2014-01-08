@@ -1,3 +1,4 @@
 .vagrant
 Berksfile.lock
 .DS_Store
+simavr-1.1

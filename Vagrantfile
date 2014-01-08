@@ -11,11 +11,12 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
   config.ssh.forward_x11 = true
 
+  # only use 1 core to prevent deadlocks in simavr
   config.vm.provider :virtualbox do |vb|
     vb.customize [
       "modifyvm", :id,
       "--memory", "1024",
-      "--cpus", "2",
+      "--cpus", "1",
     ]
   end
 
