@@ -28,12 +28,12 @@ static int uart_putchar(char c, FILE *stream) {
 
 static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
-#include "test.h"
+#include "mylib.h"
 
 int main() {
   stdout = &mystdout;
 
-  test_run();
+  printf("Started\n");
 
   // this quits the simulator, since interrupts are off
   // this is a "feature" that allows running tests cases and exit

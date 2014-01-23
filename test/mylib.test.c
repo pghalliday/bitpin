@@ -1,4 +1,4 @@
-#include "test.h"
+#include "mylib.test.h"
 #include "cspec.h"
 #include "cspec_output_verbose.h"
 #include <stdio.h>
@@ -24,6 +24,6 @@ DESCRIBE(strcmp, "int strcmp ( const char * str1, const char * str2 )")
 
 END_DESCRIBE
 
-void test_run(void) {
-  printf("%d tests failed\n", CSpec_Run( DESCRIPTION( strcmp ), CSpec_NewOutputVerbose() ));
+int mylib_test_run(void) {
+  return CSpec_Run( DESCRIPTION( strcmp ), CSpec_NewOutputVerbose() );
 }

@@ -1,5 +1,4 @@
 /.vagrant
 /Berksfile.lock
 .DS_Store
-*.hex
-*.axf
+/build

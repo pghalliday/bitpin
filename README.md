@@ -25,7 +25,27 @@ In another terminal you have a few seconds to run
 
 ```
 cd /vagrant
-avrdude -p m328p -c arduino -P /tmp/simavr-uart0 -U flash:w:main.hex
+avrdude -p m328p -c arduino -P /tmp/simavr-uart0 -U flash:w:build/test.hex
+```
+
+The will load the hex image into simduino and run it
+
+
+To run the application
+----------------------
+
+In one terminal
+
+```
+cd /opt/simavr-1.1/examples/board_simduino
+./obj-x86_64-linux-gnu/simduino.elf
+```
+
+In another terminal you have a few seconds to run
+
+```
+cd /vagrant
+avrdude -p m328p -c arduino -P /tmp/simavr-uart0 -U flash:w:build/main.hex
 ```
 
 The will load the hex image into simduino and run it
