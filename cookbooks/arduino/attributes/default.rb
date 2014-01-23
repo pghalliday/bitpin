@@ -1,1 +1,0 @@
-default[:arduino][:user] = "vagrant"
