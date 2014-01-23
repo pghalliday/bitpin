@@ -29,3 +29,10 @@ avrdude -p m328p -c arduino -P /tmp/simavr-uart0 -U flash:w:main.hex
 ```
 
 The will load the hex image into simduino and run it
+
+License
+-------
+
+Copyright &copy; 2014 Peter Halliday
+
+Licensed under the MIT license.
