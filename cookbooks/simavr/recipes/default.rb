@@ -14,7 +14,7 @@ magic_shell_environment 'SIMAVR_UART_XTERM' do
   value '1'
 end
 
-remote_file "#{Chef::Config[:file_cache_path]}/simavr-#{node[:simavr][:version]}.tar.gz" do
+remote_file "#{Chef::Config[:file_cache_path]}/simavr.tar.gz" do
   source node[:simavr][:url]
 end
 
@@ -28,7 +28,7 @@ end
 bash "compile and install simavr" do
   user node[:simavr][:user]
   code <<-EOH
-    tar -zxf #{Chef::Config[:file_cache_path]}/simavr-#{node[:simavr][:version]}.tar.gz --strip-components=1 -C #{node[:simavr][:install_dir]}
+    tar -zxf #{Chef::Config[:file_cache_path]}/simavr.tar.gz --strip-components=1 -C #{node[:simavr][:install_dir]}
     cd #{node[:simavr][:install_dir]}
     make all
     sudo make install
