@@ -39,7 +39,7 @@ ${BUILD}/%.s: ${BUILD}/%.axf
 	@avr-objdump -j .text -j .data -j .bss -d  ${<} > ${@}
 
 # --mcall-prologues can be used here, but messes up debugging a little
-${BUILD}/%.axf: %.c ${BUILD}
+${BUILD}/%.axf: %.c ${filter-out ${wildcard ${BUILD}},${BUILD}}
 	@echo AVR-CC ${<}
 	@avr-gcc -Wall -gdwarf-2 -Os -std=gnu99 \
 		-mmcu=atmega328p \

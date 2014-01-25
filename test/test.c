@@ -34,6 +34,7 @@ int main() {
   int failed = 0;
   stdout = &mystdout;
 
+  printf("\n\n\n\n\n");
   failed += mylib_test_run();
   printf("%d tests failed\n", failed);
 
