@@ -8,7 +8,7 @@
 DESCRIBE(strcmp, "int strcmp ( const char * str1, const char * str2 )")
 
   IT( "returns 0 only when strings are equal" )
-    SHOULD_EQUAL( strcmp("hello", "hello"), 2);
+    SHOULD_EQUAL( strcmp("hello", "hello"), 0);
     SHOULD_NOT_EQUAL( strcmp("hello", "world"), 0);
   END_IT
 

@@ -25,26 +25,24 @@
 #define DEFINE_DESCRIPTION(foo)				  void foo ## _describe();
 #define DESCRIPTION(foo)					  foo ## _describe
 
-#define _DESCRIBE(foo, caption, caption_variable, string_table_variable) \
+#define DESCRIBE(foo, caption) \
 void foo ## _describe () { \
   STATIC_ASSERT(sizeof(caption) <= CSPEC_MAX_MESSAGE_SIZE, PASTE(Description_caption_string_cannot_exceed_,PASTE(CSPEC_MAX_MESSAGE_SIZE,_bytes))); \
-  static prog_char caption_variable[] PROGMEM = caption; \
-  PROGMEM static const char * string_table_variable[] = { \
-    caption_variable \
+  static prog_char _caption[] PROGMEM = caption; \
+  PROGMEM static const char * string_table[] = { \
+    _caption \
   }; \
-  CSpec_StartDescribe(string_table_variable); \
+  CSpec_StartDescribe(string_table); \
   {
-#define DESCRIBE(foo, caption) _DESCRIBE(foo, caption, CSPEC_VARIABLE, CSPEC_VARIABLE)
-#define _IT(caption, caption_variable, string_table_variable) \
+#define IT(caption) \
     { \
       STATIC_ASSERT(sizeof(caption) <= CSPEC_MAX_MESSAGE_SIZE, PASTE(It_caption_string_cannot_exceed_,PASTE(CSPEC_MAX_MESSAGE_SIZE,_bytes))); \
-      static prog_char caption_variable[] PROGMEM = caption; \
-      PROGMEM static const char * string_table_variable[] = { \
-        caption_variable \
+      static prog_char _caption[] PROGMEM = caption; \
+      PROGMEM static const char * string_table[] = { \
+        _caption \
       }; \
-      CSpec_StartIt(string_table_variable); \
+      CSpec_StartIt(string_table); \
       {
-#define IT(caption) _IT(caption, CSPEC_VARIABLE, CSPEC_VARIABLE)
 #define END_IT \
       } \
       CSpec_EndIt(); \
