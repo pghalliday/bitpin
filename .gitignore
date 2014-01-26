@@ -1,6 +1,6 @@
+.DS_Store
 /.vagrant
 /Berksfile.lock
-.DS_Store
 /build
-node_modules
+/node_modules
 /thirdparty
