@@ -11,17 +11,30 @@ TEST_DIRS := ${shell find ${TEST} -type d -print}
 TEST_FILES := ${filter-out test.c,${notdir ${shell find ${TEST} -type f -name *.c -print}}}
 TEST_HEADERS := ${notdir ${shell find ${TEST} -type f -name *.h -print}}
 
+ALL_DIRS := \
+	${SRC_DIRS} \
+	${TEST_DIRS}
+
+MAIN_SOURCE := \
+	${SRC_FILES} \
+	${SRC_HEADERS}
+
+TEST_SOURCE := \
+	${TEST_FILES} \
+	${TEST_HEADERS} \
+	${MAIN_SOURCE}
+
 BUILD := build
-INCLUDES := -I. -I${SIMAVR_HOME}/simavr/sim/avr ${addprefix -I,${SRC_DIRS} ${TEST_DIRS}}
-VPATH := . ${SRC_DIRS} ${TEST_DIRS}
+INCLUDES := -I. -I${SIMAVR_HOME}/simavr/sim/avr ${addprefix -I,${ALL_DIRS}}
+VPATH := . ${ALL_DIRS}
 
 all: test ${BUILD}/main.hex
 
-${BUILD}/main.axf: ${SRC_FILES} ${SRC_HEADERS}
+${BUILD}/main.axf: ${MAIN_SOURCE}
 
 test: ${BUILD}/test.hex
 
-${BUILD}/test.axf: ${TEST_FILES} ${TEST_HEADERS} ${SRC_FILES} ${SRC_HEADERS}
+${BUILD}/test.axf: ${TEST_SOURCE}
 
 ${BUILD}:
 	mkdir -p ${BUILD}

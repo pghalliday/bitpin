@@ -28,7 +28,7 @@ static int uart_putchar(char c, FILE *stream) {
 
 static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
-#include "mylib.h"
+#include "app.h"
 
 int main() {
   stdout = &mystdout;
