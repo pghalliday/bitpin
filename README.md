@@ -24,14 +24,14 @@ node test
 
 The will
 
-- compile the test.hex file
+- compile the `test.hex` image
 - start simduino
-- load the test.hex image so that it runs immediately
+- load the `test.hex` image so that it runs immediately
 - read the results from the serial port
 - exit using the number of test failures as the exit code
 
-To build the test.hex and main.hex files
-----------------------------------------
+To build the `test.hex` and `main.hex` images
+---------------------------------------------
 
 ```
 cd /vagrant
