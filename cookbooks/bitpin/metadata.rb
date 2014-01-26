@@ -1,0 +1,5 @@
+version "0.0.0"
+depends "build-essential"
+depends "nodejs"
+depends "simavr"
+depends "trezor-crypto"

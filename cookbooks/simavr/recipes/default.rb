@@ -1,3 +1,5 @@
+user node[:simavr][:user]
+
 include_recipe "build-essential"
 
 package "libelf-dev"

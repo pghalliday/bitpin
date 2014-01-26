@@ -28,9 +28,7 @@ Vagrant.configure("2") do |config|
     }
     chef.run_list = [
       "apt",
-      "recipe[simavr]",
-      "build-essential",
-      "nodejs"
+      "recipe[bitpin]"
     ]
   end
 end
