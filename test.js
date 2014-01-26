@@ -29,7 +29,7 @@ exec('make test', {}, function(error, stdout, stderr) {
       // var match = regex.exec(simduino_data);
 
       setTimeout(function() {
-        var serialPort = new SerialPort('/dev/pts/3'/* match[1] */, {
+        var serialPort = new SerialPort('/dev/pts/2'/* match[1] */, {
           baudrate: 115200,
           databits: 8,
           stopbits: 1,
