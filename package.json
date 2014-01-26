@@ -1,0 +1,8 @@
+{
+  "name": "bitpin",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "serialport": "~1.3.1"
+  }
+}

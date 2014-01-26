@@ -21,9 +21,16 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision :chef_solo do |chef|
+    chef.json = {
+      "nodejs" => {
+        "install_method" => "package"
+      }
+    }
     chef.run_list = [
       "apt",
       "recipe[simavr]",
+      "build-essential",
+      "nodejs"
     ]
   end
 end

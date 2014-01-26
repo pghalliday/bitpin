@@ -34,9 +34,9 @@ int main() {
   int failed = 0;
   stdout = &mystdout;
 
-  printf("\n\n\n\n\n");
+  printf("CSPEC: starting tests\n\n");
   failed += mylib_test_run();
-  printf("%d tests failed\n", failed);
+  printf("CSPEC: %d tests failed\n", failed);
 
   // this quits the simulator, since interrupts are off
   // this is a "feature" that allows running tests cases and exit
