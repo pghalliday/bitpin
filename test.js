@@ -13,7 +13,11 @@ exec('make test', {}, function(error, stdout, stderr) {
 
   var simduino_data = '';
   var env = process.env;
+
+  // enable the serial port to collect results
   env['SIMAVR_UART_TAP'] = '1';
+
+  // disable picocom and xterm so that we can connect to the serial port
   env['SIMAVR_UART_XTERM'] = '0';
 
   // TODO: The build path for simduino is
@@ -31,7 +35,8 @@ exec('make test', {}, function(error, stdout, stderr) {
     // TODO: The OpenGL stuff in simduino seems to break the stdout here so that it no longer comes out. As such
     // the only output I get is the initial 'unsupported check type 03' stuff on stderr. It would be nice if I could get
     // the other output that goes to the terminal when I launch simduino at the command line as this includes
-    // the actual port used so I could stop hardcoding it (it does change under certain conditions)
+    // the actual port used so I could stop hardcoding it (it does change under certain conditions - eg. another
+    // instance running)
     //
     // if (simduino_data.indexOf('note: export SIMAVR_UART_XTERM=1 and install picocom to get a terminal') !== -1) {
     if (simduino_data.indexOf('read_ihex_file: ATmegaBOOT_168_atmega328.ihex, unsupported check type 03') !== -1) {
