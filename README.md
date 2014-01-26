@@ -22,7 +22,7 @@ npm install
 node test
 ```
 
-The will
+This will
 
 - compile the `test.hex` image
 - start simduino
