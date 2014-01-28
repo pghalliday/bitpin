@@ -33,7 +33,7 @@ static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 int main() {
   stdout = &mystdout;
 
-  printf("Started\n");
+  printf("Started: %s\n", app_init());
 
   // this quits the simulator, since interrupts are off
   // this is a "feature" that allows running tests cases and exit

@@ -9,29 +9,28 @@
 
 #define PBKDF2_ROUNDS 2048
 
-const char *mnemonic_generate(int strength)
+void mnemonic_generate(char mnemonic[24 * 10], int strength)
 {
 	int i;
 	static uint32_t data[16];
 	if (strength % 32 || strength < 128 || strength > 256) {
-		return 0;
+		return;
 	}
 	for (i = 0; i < 16; i++) {
 		data[i] = random32();
 	}
-	return mnemonic_from_data((const uint8_t *)data, strength / 8);
+	mnemonic_from_data(mnemonic, (const uint8_t *)data, strength / 8);
 }
 
-const char *mnemonic_from_data(const uint8_t *data, int len)
+void mnemonic_from_data(char mnemonic[24 * 10], const uint8_t *data, int len)
 {
 	int i, j;
 	static uint8_t hash[32];
 	static char bits[256 + 8];
-	static char mnemo[24 * 10];
 	char buffer[BIP39_MAX_WORD_SIZE];
 
 	if (len % 4 || len < 16 || len > 32) {
-		return 0;
+		return;
 	}
 
 	SHA256_Raw((const uint8_t *)data, len, hash);
@@ -50,7 +49,7 @@ const char *mnemonic_from_data(const uint8_t *data, int len)
 
 	int mlen = len * 3 / 4;
 
-	char *p = mnemo;
+	char *p = mnemonic;
 	for (i = 0; i < mlen; i++) {
 		int idx = 0;
 		for (j = 0; j < 11; j++) {
@@ -62,8 +61,6 @@ const char *mnemonic_from_data(const uint8_t *data, int len)
 		*p = (i < mlen - 1) ? ' ' : 0;
 		p++;
 	}
-
-	return mnemo;
 }
 
 void mnemonic_to_seed(const char *mnemonic, const char *passphrase, uint8_t seed[512 / 8])

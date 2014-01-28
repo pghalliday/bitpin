@@ -29,6 +29,7 @@ static int uart_putchar(char c, FILE *stream) {
 static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
 
 #include "rand.test.h"
+#include "bip39.test.h"
 #include "app.test.h"
 
 int main() {
@@ -43,6 +44,7 @@ int main() {
   printf("%s: starting tests\n\n", "CSPEC");
 
   failed += rand_test_run();
+  failed += bip39_test_run();
   failed += app_test_run();
 
   printf("CSPEC: %d tests failed\n", failed);

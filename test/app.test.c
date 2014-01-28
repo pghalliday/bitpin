@@ -4,28 +4,33 @@
 
 #include "app.h"
 #include <stdio.h>
+#include <avr/eeprom.h>
+#include <count_words.h>
 
 DESCRIBE(app_init, "char * app_init();");
 
   IT( "should return a new mnemonic with strength 256" );
-    char * mnemonic = app_init();
     int word_count = 0;
-
-    printf("\t\tmnemonic: %s\n", mnemonic);
-
-    while (* mnemonic) {
-      if (word_count == 0) {
-        word_count = 1;
-      }
-      if (* mnemonic == ' ') {
-        word_count++;
-      }
-      mnemonic++;
-    }
-
-    printf("\t\tword_count: %d\n", word_count);
+    char * mnemonic = app_init();
+    word_count = count_words(mnemonic);
 
     SHOULD_EQUAL(word_count, ((256 / 8) * 3) / 4);
+  END_IT;
+
+  IT( "should read the mnemonic from eeprom if there is one" );
+    char * mnemonic;
+    static char test_mnemonic[(24 * 10) + sizeof("mnemonic:") - 1] = "mnemonic:This is a test";
+
+    eeprom_busy_wait();
+    eeprom_write_block(
+      (void *) test_mnemonic,
+      0x0,
+      (24 * 10) + sizeof("mnemonic:") - 1
+    );
+
+    mnemonic = app_init();
+
+    SHOULD_MATCH(mnemonic, "This is a test");
   END_IT;
 
 END_DESCRIBE;
