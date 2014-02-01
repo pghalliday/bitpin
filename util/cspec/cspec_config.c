@@ -15,13 +15,11 @@
 
 #include "cspec_config.h"
 
-int cspec_strcmp ( const char * str1, const char * str2 )
-{
+int cspec_strcmp (const char * str1, const char * str2) {
 	return strcmp(str1, str2);
 }
 
-cspec_double cspec_fabs( cspec_double arg )
-{
+cspec_double cspec_fabs(cspec_double arg) {
 	return fabs(arg);
 }
 

@@ -17,37 +17,42 @@ static int getAnsiColorCode(CSpec_Color color);
 static void setColor(CSpec_Color color);
 static void resetColor(void);
 
-void startDescribeFunVerbose( const char *descr) {
+void startDescribeFunVerbose(const char *descr) {
 	fputs("Describe: ", stdout);
 	fputs(descr, stdout);
 	fputs("\n", stdout);
+	fflush(stdout);
 }
 
-void endDescribeFunVerbose( ) {
+void endDescribeFunVerbose(void) {
 	fputs("\n", stdout);
+	fflush(stdout);
 }
 
-void startItFunVerbose( const char *descr) {
+void startItFunVerbose(const char *descr) {
 	fputs("   - it ", stdout);
 	fputs(descr, stdout);
 	fputs("\n", stdout);
+	fflush(stdout);
 }
 
-void endItFunVerbose( ) {
+void endItFunVerbose(int memory_before, int memory_after) {
+	fputs("       Free Memory Before: ", stdout);
+	put_number(memory_before);
 	fputs("\n", stdout);
+	fputs("       Free Memory After: ", stdout);
+	put_number(memory_after);
+	fputs("\n\n", stdout);
+	fflush(stdout);
 }
 
 void evalFunVerbose(const char*filename, int line_number, const char*assertion, int assertionResult) {
-	if(assertionResult)
-	{
+	if(assertionResult) {
 		setColor(CSPEC_COLOR_GREEN);
 		fputs("       OK: ", stdout);
 		fputs(assertion, stdout);
-		fputs("\n", stdout);
-		resetColor();
 	}
-	else
-	{
+	else {
 		setColor(CSPEC_COLOR_RED);
 		fputs("       Failed: ", stdout);
 		fputs(assertion, stdout);
@@ -55,9 +60,10 @@ void evalFunVerbose(const char*filename, int line_number, const char*assertion, 
 		fputs(filename, stdout);
 		fputs(" at line ", stdout);
 		put_number(line_number);
-		fputs("\n", stdout);
-		resetColor();
 	}
+	fputs("\n", stdout);
+	resetColor();
+	fflush(stdout);
 }
 
 void pendingFunVerbose(const char* reason) {
@@ -66,9 +72,10 @@ void pendingFunVerbose(const char* reason) {
 	fputs(reason, stdout);
 	fputs("\n", stdout);
 	resetColor();
+	fflush(stdout);
 }
 
-CSpecOutputStruct* CSpec_NewOutputVerbose() {
+CSpecOutputStruct* CSpec_NewOutputVerbose(void) {
 	CSpec_InitOutput(&verbose);
 	
 	verbose.startDescribeFun	= startDescribeFunVerbose;
@@ -84,8 +91,7 @@ CSpecOutputStruct* CSpec_NewOutputVerbose() {
 static int getAnsiColorCode(CSpec_Color color) {
 	int color_code;
 
-	switch(color)
-	{
+	switch(color) {
 	case CSPEC_COLOR_RED:
 		color_code = 31;
 		break;

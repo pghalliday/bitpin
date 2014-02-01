@@ -11,17 +11,16 @@
 extern "C" {
 #endif
 
-typedef void ( * CSpecOutputStartDescribeFun ) ( const char *descr);
-typedef void ( * CSpecOutputEndDescribeFun ) ( );
+typedef void ( * CSpecOutputStartDescribeFun ) (const char *descr);
+typedef void ( * CSpecOutputEndDescribeFun ) (void);
 
-typedef void ( * CSpecOutputStartItFun ) ( const char *descr);
-typedef void ( * CSpecOutputEndItFun ) ( );
+typedef void ( * CSpecOutputStartItFun ) (const char *descr);
+typedef void ( * CSpecOutputEndItFun ) (int memory_before, int memory_after);
 
 typedef void ( * CSpecOutputEvalFun ) (const char*filename, int line_number, const char*assertion, int assertionResult);
 typedef void ( * CSpecOutputPendingFun ) (const char* reason);
 
-typedef struct
-{
+typedef struct {
 
 	CSpecOutputStartDescribeFun		startDescribeFun;
 	CSpecOutputEndDescribeFun		endDescribeFun;

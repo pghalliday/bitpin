@@ -9,8 +9,7 @@
 #include "cspec.h"
 #include <string.h>
 
-void CSpec_InitOutput( CSpecOutputStruct* output )
-{
+void CSpec_InitOutput(CSpecOutputStruct* output) {
 	memset(output, 0, sizeof(CSpecOutputStruct) );
 }
 

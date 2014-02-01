@@ -14,6 +14,7 @@
 #include "cspec_output.h"
 #include "paste.h"
 #include "static_assert.h"
+#include "free_ram.h"
 
 /*               */
 /* Public macros */
@@ -28,6 +29,8 @@
 #define DESCRIBE(foo, caption) \
 void foo ## _describe () { \
   STATIC_ASSERT(sizeof(caption) <= CSPEC_MAX_MESSAGE_SIZE, PASTE(Description_caption_string_cannot_exceed_,PASTE(CSPEC_MAX_MESSAGE_SIZE,_bytes))); \
+  static int CSpec_memory_before = 0; \
+  static int CSpec_memory_after = 0; \
   static prog_char _caption[] PROGMEM = caption; \
   PROGMEM static const char * string_table[] = { \
     _caption \
@@ -42,10 +45,13 @@ void foo ## _describe () { \
         _caption \
       }; \
       CSpec_StartIt(string_table); \
+      CSpec_memory_before = free_ram(); \
       {
 #define END_IT \
       } \
-      CSpec_EndIt(); \
+      CSpec_memory_after = free_ram(); \
+      SHOULD_EQUAL(CSpec_memory_before, CSpec_memory_after); \
+      CSpec_EndIt(CSpec_memory_before, CSpec_memory_after); \
     }
 #define END_DESCRIBE \
   } \

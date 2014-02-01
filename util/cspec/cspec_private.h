@@ -18,10 +18,10 @@ extern "C" {
 #endif
 
 int  CSpec_StartDescribe(const char * string_table[]);
-void CSpec_EndDescribe();
+void CSpec_EndDescribe(void);
 
 int  CSpec_StartIt(const char * string_table[]);
-void CSpec_EndIt();
+void CSpec_EndIt(int memory_before, int memory_after);
 
 void CSpec_Eval(const char * string_table[], int line_number, int assertionResult);
 void CSpec_Pending(const char * string_table[]);

@@ -12,7 +12,7 @@
 void mnemonic_generate(char mnemonic[24 * 10], int strength)
 {
 	int i;
-	static uint32_t data[16];
+	uint32_t data[16];
 	if (strength % 32 || strength < 128 || strength > 256) {
 		return;
 	}
@@ -25,8 +25,8 @@ void mnemonic_generate(char mnemonic[24 * 10], int strength)
 void mnemonic_from_data(char mnemonic[24 * 10], const uint8_t *data, int len)
 {
 	int i, j;
-	static uint8_t hash[32];
-	static char bits[256 + 8];
+	uint8_t hash[32];
+	char bits[256 + 8];
 	char buffer[BIP39_MAX_WORD_SIZE];
 
 	if (len % 4 || len < 16 || len > 32) {
@@ -65,7 +65,7 @@ void mnemonic_from_data(char mnemonic[24 * 10], const uint8_t *data, int len)
 
 void mnemonic_to_seed(const char *mnemonic, const char *passphrase, uint8_t seed[512 / 8])
 {
-	static uint8_t salt[8 + 256 + 4];
+	uint8_t salt[8 + 256 + 4];
 	int saltlen = strlen(passphrase);
 	memcpy(salt, "mnemonic", 8);
 	memcpy(salt + 8, passphrase, saltlen);
