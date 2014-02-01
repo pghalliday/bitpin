@@ -11,8 +11,14 @@ TEST_DIRS := ${shell find ${TEST} -type d -print}
 TEST_FILES := ${filter-out test.c,${notdir ${shell find ${TEST} -type f -name *.c -print}}}
 TEST_HEADERS := ${notdir ${shell find ${TEST} -type f -name *.h -print}}
 
+UTIL = util
+UTIL_DIRS := ${shell find ${UTIL} -type d -print}
+UTIL_FILES := ${filter-out test.c,${notdir ${shell find ${UTIL} -type f -name *.c -print}}}
+UTIL_HEADERS := ${notdir ${shell find ${UTIL} -type f -name *.h -print}}
+
 ALL_DIRS := \
 	${SRC_DIRS} \
+	${UTIL_DIRS} \
 	${TEST_DIRS}
 
 MAIN_SOURCE := \
@@ -20,6 +26,8 @@ MAIN_SOURCE := \
 	${SRC_HEADERS}
 
 TEST_SOURCE := \
+	${UTIL_FILES} \
+	${UTIL_HEADERS} \
 	${TEST_FILES} \
 	${TEST_HEADERS} \
 	${MAIN_SOURCE}
