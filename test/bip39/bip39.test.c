@@ -3,7 +3,6 @@
 #include "cspec_output_verbose.h"
 
 #include "bip39.h"
-#include <stdio.h>
 #include <count_words.h>
 
 static char mnemonic[24 * 10];

@@ -3,7 +3,6 @@
 #include "cspec_output_verbose.h"
 
 #include "app.h"
-#include <stdio.h>
 #include <avr/eeprom.h>
 #include <count_words.h>
 
